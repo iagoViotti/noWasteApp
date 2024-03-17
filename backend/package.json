@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx -y tsc",
+    "prestart": "npm run build",
+    "start": "node .",
+    "predev": "",
+    "dev": "nodemon dist/index.js",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "author": "",
   "license": "ISC",
