@@ -1,12 +1,12 @@
 import express = require('express');
-// import router from './routes';
+import router from './routes';
 
 export default class App {
   public app: express.Express;
 
   constructor() {
     this.app = express();
-    // this.config();
+    this.config();
     this.routes();
   }
 
@@ -23,8 +23,7 @@ export default class App {
   }
 
   private routes(): void {
-    // this.app.use(router);
-    // implementar e importar rotas
+    this.app.use(router);
   }
 
   public start(PORT: string | number): void {
