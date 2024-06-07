@@ -12,4 +12,14 @@ export class FridgeController {
     
     return res.status(getHTTPStatusMessage(response.status)).send(response.data);
   }
+
+  public async addItem(req: Request, res: Response) {
+
+    const { body } = req;
+    console.log('BODY:::::', body);
+    
+    const response = await this.fridgeService.addItem(body);
+    
+    return res.status(getHTTPStatusMessage(response.status)).send(response.data);
+  }
 }
