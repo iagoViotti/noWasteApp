@@ -16,8 +16,7 @@ export default class FridgeService {
   }
 
   async getAll() {
-    // const items = await this.fridgeModel.findAll();
-    const items = null; //for now
+    const items = await this.fridgeModel.findAll();
 
     if (!items) {
       return { status: 'NOT_FOUND', data: { message: `Items not found` } }
@@ -26,13 +25,31 @@ export default class FridgeService {
     return { status: "SUCCESSFUL", data: items }
   }
 
-  async update() {
-    // const item = await this.fridgeModel.update();
-    // return item;
+  async update(id: number, body: FridgeItem) {
+    const item = await this.fridgeModel.finById(id);
+
+    if (!item) {
+      return { status: 'NOT_FOUND', data: { message: `Item not found` } }
+    }
+
+    const updatedItem = await this.fridgeModel.update(body, id);
+    return { status: 'SUCCESSFUL', data: updatedItem }
+
   }
 
-  async delete() {
-    // const item = await this.fridgeModel.delete();
-    // return item;
+  async deleteAll() {
+    await this.fridgeModel.deleteAll();
+    return { status: 'SUCCESSFUL', data: { message: `All items deleted` } }
+  }
+
+  async deleteOne(id: number) {
+    const item = await this.fridgeModel.finById(id);
+
+    if (!item) {
+      return { status: 'NOT_FOUND', data: { message: `Item not found` } }
+    }
+
+    await this.fridgeModel.delete(id);
+    return { status: 'SUCCESSFUL', data: { message: `Item deleted` } }
   }
 }

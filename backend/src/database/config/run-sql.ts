@@ -23,8 +23,6 @@ async function runSQLFile(filePath: string) {
       await pool.promise().query(statement);
     }
   }
-
-  console.log(`Executed ${path.basename(filePath)}`);
   await pool.promise().end();
 }
 
