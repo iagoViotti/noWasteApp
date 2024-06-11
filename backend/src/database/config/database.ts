@@ -17,12 +17,12 @@ import mysql, { PoolOptions } from 'mysql2';
 const access: PoolOptions = {
   user: 'root',
   password: '123456',
-  database: 'db',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  host: 'database',
+  port: 3306
 }
 
-const pool = mysql.createPool(access);
+const connection = mysql.createPool(access);
 
-export default pool;
+export default connection;

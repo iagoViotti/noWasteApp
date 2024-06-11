@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "npx -y tsc",
-    "prestart": "npm run build",
+    "prestart": "npm run build && npm run init-db && npm run migrate && npm run seed",
     "start": "node .",
     "predev": "",
     "dev": "nodemon --exec ts-node-dev src/server.ts",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "init-db": "ts-node src/database/config/run-sql.ts src/database/sql/initDB.sql",
+    "migrate": "ts-node src/database/config/run-sql.ts src/database/sql/migration.sql",
+    "seed": "ts-node src/database/config/run-sql.ts src/database/sql/seed.sql"
   },
   "author": "",
   "license": "ISC",

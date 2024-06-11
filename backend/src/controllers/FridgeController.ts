@@ -7,19 +7,15 @@ export class FridgeController {
     private fridgeService = new FridgeService(),
   ) {}
 
+  public async addItem(req: Request, res: Response) {
+    const { body } = req;
+    const response = await this.fridgeService.addItem(body);
+    return res.status(getHTTPStatusMessage(response.status)).send(response.data);
+  }
+
   public async getAll(req: Request, res: Response) {
     const response = await this.fridgeService.getAll();
-    
     return res.status(getHTTPStatusMessage(response.status)).send(response.data);
   }
 
-  public async addItem(req: Request, res: Response) {
-
-    const { body } = req;
-    console.log('BODY:::::', body);
-    
-    const response = await this.fridgeService.addItem(body);
-    
-    return res.status(getHTTPStatusMessage(response.status)).send(response.data);
-  }
 }
