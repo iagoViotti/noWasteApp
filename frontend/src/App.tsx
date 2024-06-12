@@ -1,11 +1,13 @@
 import './App.css'
-import Fridge from './pages/Fridge.tsx'
-// import { FridgeContext } from './context/FridgeContext.tsx'
+import { FridgeProvider } from './context/FridgeContext.tsx'
+import Home from './pages/Home.tsx'
 
 function App() {
   return (
     <>
-      <Fridge />
+      <FridgeProvider>
+        <Home />
+      </FridgeProvider>
     </>
   )
 }

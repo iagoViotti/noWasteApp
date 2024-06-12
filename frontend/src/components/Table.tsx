@@ -1,6 +1,13 @@
-// import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
+import { useEffect } from 'react';
+import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
+import { useFridge } from '../context/FridgeContext';
+import { handleDate } from '../utils/handleDate';
 
 const Table = () => {
+  const { fridgeItems, refreshFridgeItems } = useFridge();
+  useEffect(() => {
+    refreshFridgeItems();
+  }, []);
 
   return (
     <>
@@ -14,16 +21,23 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {fridgeItems &&
+          {fridgeItems &&
             fridgeItems.map((item: FridgeItem) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>
-                <td>{item.expiry_date}</td>
+                <td>{handleDate(item.expiry_date)}</td>
                 <td>{item.type}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      console.log('Editar o', item.name, 'de id de numero', item.id);
+                    }}
+                  >Editar</button>
+                </td>
               </tr>
             ))
-          } */}
+          }
         </tbody>
       </table>
     </>
