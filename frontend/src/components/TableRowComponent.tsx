@@ -36,7 +36,10 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
 
   return (
     <tr
-      style={{ backgroundColor: mapExpiryDate(deltaTimeInDays(expiry_date)), color: 'black' }}
+      style={{
+        backgroundColor: mapExpiryDate(deltaTimeInDays(expiry_date)),
+        color: 'black'
+      }}
     >
       <td>{name}</td>
       <td>{quantity}</td>
