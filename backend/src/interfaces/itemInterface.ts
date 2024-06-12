@@ -4,4 +4,5 @@ export interface FridgeItem {
   quantity: number;
   expiry_date: string;
   type: 'food' | 'vegetable' | 'fruit' | 'beverage' | 'other';
+  [key: string]: any;
 }
