@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 import { useFridge } from '../context/FridgeContext';
-import { handleDate } from '../utils/handleDate';
+import FridgeItemRow from './TableRowComponent'
 
 const Table = () => {
   const { fridgeItems, refreshFridgeItems } = useFridge();
+
   useEffect(() => {
     refreshFridgeItems();
   }, []);
@@ -22,21 +23,22 @@ const Table = () => {
         </thead>
         <tbody>
           {fridgeItems &&
-            fridgeItems.map((item: FridgeItem) => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.quantity}</td>
-                <td>{handleDate(item.expiry_date)}</td>
-                <td>{item.type}</td>
-                <td>
-                  <button
-                    onClick={() => {
-                      console.log('Editar o', item.name, 'de id de numero', item.id);
-                    }}
-                  >Editar</button>
-                </td>
-              </tr>
-            ))
+            fridgeItems
+              // .sort((a: FridgeItem, b: FridgeItem) => {
+              //   if (a.expiry_date > b.expiry_date) {
+              //     return 1;
+              //   }
+              //   if (a.expiry_date < b.expiry_date) {
+              //     return -1;
+              //   }
+              //   return 0;
+              // })
+              .map((item: FridgeItem) => (
+                <FridgeItemRow
+                  key={item.id}
+                  item={item}
+                />
+              ))
           }
         </tbody>
       </table>

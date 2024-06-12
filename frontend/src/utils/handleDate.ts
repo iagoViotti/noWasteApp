@@ -1,4 +1,4 @@
-export const handleDate = (date: string): string => {
+export default function handleDate(date: string): string {
   const dateObject = new Date(date);
   const day = dateObject.getDate();
   const month = dateObject.getMonth() + 1;

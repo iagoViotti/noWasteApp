@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 import { FridgeProviderProps, FridgeContextType } from '../interfaces/fridgeInterfaces';
-import ApiService from '../utils/requests';
+import { ApiService } from '../utils';
 
 export const FridgeContext = createContext<FridgeContextType | undefined>(undefined)
 
