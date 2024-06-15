@@ -3,6 +3,7 @@ import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 import { useFridge } from '../context/FridgeContext';
 import FridgeItemRow from './TableRowComponent'
 import { IMapSortOrder } from '../interfaces/utilsInterfaces';
+import ApiService from '../utils/requests';
 
 const Table = () => {
   const { fridgeItems, refreshFridgeItems } = useFridge();
@@ -18,6 +19,15 @@ const Table = () => {
     refreshFridgeItems();
   }, []);
 
+  const cleanFridge = async () => {
+    try {
+      await new ApiService().delete('/')
+      refreshFridgeItems()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  
   return (
     <>
       <div>
@@ -38,6 +48,11 @@ const Table = () => {
           <option value="asc">Crescente</option>
           <option value="desc">Decrescente</option>
         </select>
+        <button
+          onClick={cleanFridge}
+        >
+          Limpar Geladeira
+        </button>
       </div>
       <table>
         <thead>

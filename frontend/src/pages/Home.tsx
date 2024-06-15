@@ -1,3 +1,4 @@
+import AddItemModal from "../components/AddItemModal"
 import Table from "../components/Table"
 
 const Home = () => {
@@ -5,6 +6,7 @@ const Home = () => {
     <>
       <h1>Fridge</h1>
       <Table />
+      <AddItemModal />
     </>
   )
 }
