@@ -4,7 +4,10 @@ import { FridgeItem } from '../../../backend/src/interfaces/itemInterface.ts';
 class ApiService {
   private api: AxiosInstance
 
-  constructor(baseURL: string = 'http://localhost:3010') {
+  constructor(
+    // baseURL: string = 'http://localhost:3010'
+    baseURL: string = 'http://192.168.1.114:3010'
+  ) {
     this.api = axios.create({ baseURL })
   }
 
