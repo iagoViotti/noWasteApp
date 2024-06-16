@@ -1,19 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 import { useFridge } from '../context/FridgeContext';
 import FridgeItemRow from './TableRowComponent'
 import { IMapSortOrder } from '../interfaces/utilsInterfaces';
 import ApiService from '../utils/requests';
+import ModalContext from '../context/ModalContext';
 
 const Table = () => {
   const { fridgeItems, refreshFridgeItems } = useFridge();
   const [sortBy, setSortBy] = useState<string>('expiry_date');
   const [sortOrder, setSortOrder] = useState<string>('asc');
+  const { setModal } = useContext(ModalContext)
 
   const mapSortOrder: IMapSortOrder = {
     asc: 1,
     desc: -1,
-  };  
+  };
 
   useEffect(() => {
     refreshFridgeItems();
@@ -27,7 +29,7 @@ const Table = () => {
       console.error(error)
     }
   }
-  
+
   return (
     <>
       <div>
@@ -52,6 +54,10 @@ const Table = () => {
           onClick={cleanFridge}
         >
           Limpar Geladeira
+        </button>
+        <button
+          onClick={() => setModal(true)}
+        >Adicionar Item
         </button>
       </div>
       <table>
