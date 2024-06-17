@@ -1,19 +1,21 @@
 import './App.css'
 import { FridgeProvider } from './context/FridgeContext.tsx'
-import ModalContext from './context/ModalContext.tsx'
+import { ModalProvider } from './context/ModalContext.tsx'
+import { SelectProvider } from './context/SelectContext.tsx'
 import Home from './pages/Home.tsx'
-import { useState } from 'react'
 
 function App() {
-  const [modal, setModal] = useState(false)
+  // const [modal, setModal] = useState(false)
 
   return (
     <>
-      <ModalContext.Provider value={{ modal, setModal }}>
+      <ModalProvider>
         <FridgeProvider>
-          <Home />
+          <SelectProvider>
+            <Home />
+          </SelectProvider>
         </FridgeProvider>
-      </ModalContext.Provider>
+      </ModalProvider>
     </>
   )
 }

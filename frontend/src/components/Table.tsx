@@ -4,16 +4,20 @@ import { useFridge } from '../context/FridgeContext';
 import FridgeItemRow from './TableRowComponent'
 import { IMapSortOrder } from '../interfaces/utilsInterfaces';
 import ApiService from '../utils/requests';
+import { useModal } from '../context/ModalContext';
+import { useSelect } from '../context/SelectContext';
 
 const Table = () => {
   const { fridgeItems, refreshFridgeItems } = useFridge();
   const [sortBy, setSortBy] = useState<string>('expiry_date');
   const [sortOrder, setSortOrder] = useState<string>('asc');
+  const { setModal } = useModal()
+  const { setSelectedItems } = useSelect();
 
   const mapSortOrder: IMapSortOrder = {
     asc: 1,
     desc: -1,
-  };  
+  };
 
   useEffect(() => {
     refreshFridgeItems();
@@ -27,7 +31,17 @@ const Table = () => {
       console.error(error)
     }
   }
-  
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedItems(() => {
+      if (e.target.checked) {
+        return fridgeItems
+      } else {
+        return []
+      }
+    })
+  }
+
   return (
     <>
       <div>
@@ -53,10 +67,20 @@ const Table = () => {
         >
           Limpar Geladeira
         </button>
+        <button
+          onClick={() => setModal(true)}
+        >Adicionar Item
+        </button>
       </div>
       <table>
         <thead>
           <tr>
+            <th>
+              <input
+                type="checkbox"
+                onChange={(e) => handleSelectAll(e)}
+              />
+            </th>
             <th>Nome</th>
             <th>Quantidade</th>
             <th>Data de Validade</th>
