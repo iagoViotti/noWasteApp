@@ -1,16 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 import { useFridge } from '../context/FridgeContext';
 import FridgeItemRow from './TableRowComponent'
 import { IMapSortOrder } from '../interfaces/utilsInterfaces';
 import ApiService from '../utils/requests';
-import ModalContext from '../context/ModalContext';
+import { useModal } from '../context/ModalContext';
+import { useSelect } from '../context/SelectContext';
 
 const Table = () => {
   const { fridgeItems, refreshFridgeItems } = useFridge();
   const [sortBy, setSortBy] = useState<string>('expiry_date');
   const [sortOrder, setSortOrder] = useState<string>('asc');
-  const { setModal } = useContext(ModalContext)
+  const { setModal } = useModal()
+  const { setSelectedItems } = useSelect();
 
   const mapSortOrder: IMapSortOrder = {
     asc: 1,
@@ -28,6 +30,16 @@ const Table = () => {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedItems(() => {
+      if (e.target.checked) {
+        return fridgeItems
+      } else {
+        return []
+      }
+    })
   }
 
   return (
@@ -63,6 +75,12 @@ const Table = () => {
       <table>
         <thead>
           <tr>
+            <th>
+              <input
+                type="checkbox"
+                onChange={(e) => handleSelectAll(e)}
+              />
+            </th>
             <th>Nome</th>
             <th>Quantidade</th>
             <th>Data de Validade</th>

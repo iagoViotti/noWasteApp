@@ -1,12 +1,12 @@
 import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
-import { useContext, useState } from 'react';
-import ModalContext from '../context/ModalContext';
+import { useState } from 'react';
+import { useModal } from '../context/ModalContext';
 import './AddItemModal.css';
 import { ApiService } from '../utils';
 import { useFridge } from '../context/FridgeContext';
 
 const AddItemModal = () => {
-  const { setModal } = useContext(ModalContext);
+  const { setModal } = useModal();
   const { refreshFridgeItems } = useFridge();
   const [form, setForm] = useState<FridgeItem>({
     name: '',
@@ -18,12 +18,8 @@ const AddItemModal = () => {
 
   const addItem = async () => {
     try {
-      console.log(form);
-      const response = await new ApiService().post('/', form);
-      console.log(response.data);
-
+      await new ApiService().post('/', form);
       setModal(false);
-
     } catch (error) {
       console.error(error);
     } finally {
