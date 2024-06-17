@@ -3,9 +3,11 @@ import { FridgeItemRowProps } from '../interfaces/fridgeItemRowprop';
 import trash from '../assets/trash.svg';
 import { useFridge } from '../context/FridgeContext';
 import { useSelect } from '../context/SelectContext';
+import { useModal } from '../context/ModalContext';
 
 const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
   const { refreshFridgeItems } = useFridge();
+  const { setModalContent, setModal } = useModal();
   const { id, name, quantity, expiry_date, type } = item;
   const { selectedItems, setSelectedItems } = useSelect()
 
@@ -17,7 +19,6 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
       console.error(error)
     }
   }
-
 
   const mapColorByDate = (days: number) => {
     if (days < 0)
@@ -37,6 +38,10 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
     })
   }
 
+  const handleEdit = () => {
+    setModalContent(item)
+    setModal(true)
+  }
 
   return (
     <tr
@@ -58,9 +63,7 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
       <td>{type}</td>
       <td>
         <button
-          onClick={() => {
-            console.log('Editar o', name, 'de id de numero', id);
-          }}
+          onClick={() => handleEdit()}
         >Editar</button>
       </td>
       <td>

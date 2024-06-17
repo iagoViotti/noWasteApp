@@ -41,7 +41,7 @@ const Table = () => {
       }
     })
   }
-
+  
   return (
     <>
       <div>
@@ -82,7 +82,7 @@ const Table = () => {
               />
             </th>
             <th>Nome</th>
-            <th>Quantidade</th>
+            <th>Qtd.</th>
             <th>Data de Validade</th>
             <th>Tipo</th>
           </tr>

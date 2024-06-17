@@ -6,11 +6,11 @@ import { ApiService } from '../utils';
 import { useFridge } from '../context/FridgeContext';
 
 const AddItemModal = () => {
-  const { setModal } = useModal();
+  const { setModal, modalContent, cleanModal, setModalContent } = useModal();
   const { refreshFridgeItems } = useFridge();
   const [form, setForm] = useState<FridgeItem>({
     name: '',
-    quantity: 0,
+    quantity: 1,
     expiry_date: '',
     type: 'food',
   });
@@ -25,7 +25,7 @@ const AddItemModal = () => {
     } finally {
       setForm({
         name: '',
-        quantity: 0,
+        quantity: 1,
         expiry_date: '',
         type: 'food',
       });
@@ -40,24 +40,34 @@ const AddItemModal = () => {
           <h4 className="modal-title" id="addItemModalLabel">
             Add Item
           </h4>
-          <button type="button" className="btn-close">
+          <button
+            type="button"
+            className="btn-close"
+            onClick={() => {
+              cleanModal()
+              setModal(false)
+            }}
+          >
             X
           </button>
         </div>
         <div className="modal-body">
           <form>
-            <div className="mb-3">
+            <div>
               <label htmlFor="name" className="form-label">Name</label>
               <input
                 type="text"
                 className="form-input"
                 id="name"
                 onChange={(e) => {
+                  modalContent ?
+                  setModalContent({ ...modalContent, name: e.target.value}):
                   setForm({ ...form, name: e.target.value });
                 }}
+                value={modalContent?.name}
               />
             </div>
-            <div className="mb-3">
+            <div>
               <label htmlFor="quantity" className="form-label">Quantity</label>
               <input
                 type="number"
@@ -66,9 +76,10 @@ const AddItemModal = () => {
                 onChange={(e) => {
                   setForm({ ...form, quantity: Number(e.target.value) });
                 }}
+                placeholder={modalContent?.quantity.toString()}
               />
             </div>
-            <div className="mb-3">
+            <div>
               <label htmlFor="type" className="form-label">Type</label>
               <select
                 className="form-input"
@@ -84,7 +95,7 @@ const AddItemModal = () => {
                 <option value="other">Other</option>
               </select>
             </div>
-            <div className="mb-3">
+            <div>
               <label htmlFor="expiry" className="form-label">Expiry</label>
               <input
                 type="date"
@@ -99,9 +110,10 @@ const AddItemModal = () => {
               type="button"
               onClick={() => addItem()}
               disabled={
-                !form.name ||
-                !form.quantity ||
-                !form.expiry_date}
+                form.name === '' ||
+                form.expiry_date === '' ||
+                form.quantity === 0
+              }
             >
               Add
             </button>

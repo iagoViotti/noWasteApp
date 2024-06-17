@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { ModalProviderProps } from '../interfaces/utilsInterfaces';
+import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 
 
 export const ModalContext = createContext<any>(undefined);
@@ -14,9 +15,14 @@ export const useModal = () => {
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [modal, setModal] = useState(false);
+  const [modalContent, setModalContent] = useState<FridgeItem | undefined>(undefined);
 
+  const cleanModal = () => {
+    setModalContent(undefined);
+  }
+  
   return (
-    <ModalContext.Provider value={{ modal, setModal }}>
+    <ModalContext.Provider value={{ modal, setModal, modalContent, setModalContent, cleanModal }}>
       {children}
     </ModalContext.Provider>
   );
