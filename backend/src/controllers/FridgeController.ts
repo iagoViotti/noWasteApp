@@ -41,4 +41,9 @@ export class FridgeController {
     const response = await this.fridgeService.deleteMultiple(body);
     return res.status(getHTTPStatusMessage(response.status)).send(response.data);
   }
+
+  public async save(_req: Request, res: Response) {
+    const response = await this.fridgeService.save();
+    return res.status(getHTTPStatusMessage(response.status)).send(response.data);
+  }
 }

@@ -5,6 +5,7 @@ const fridgeController = new FridgeController()
 
 const fridgeRouter = Router()
 
+fridgeRouter.get('/save', async (_req: Request, res: Response) => { fridgeController.save(_req, res)})
 fridgeRouter.get('/', async (req: Request, res: Response) => { fridgeController.getAll(req, res) })
 fridgeRouter.post('/', async (req: Request, res: Response) => { fridgeController.addItem(req, res) })
 fridgeRouter.put('/:id', async (req: Request, res: Response) => { fridgeController.update(req, res) })

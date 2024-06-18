@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "../backend/src/database/sql/writeSeed.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

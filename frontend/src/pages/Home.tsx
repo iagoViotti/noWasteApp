@@ -1,4 +1,5 @@
 import AddItemModal from "../components/AddItemModal"
+import Header from "../components/Header"
 import Table from "../components/Table"
 import { useModal } from "../context/ModalContext"
 
@@ -7,7 +8,7 @@ const Home = () => {
 
   return (
     <>
-      <h1>Fridge</h1>
+      <Header />
       <Table />
       {modal && <AddItemModal />}
     </>
