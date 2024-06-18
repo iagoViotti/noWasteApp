@@ -18,7 +18,6 @@ const AddItemModal = () => {
 
   const addItem = async () => {
     try {
-      console.log(form);
       await new ApiService().post('/', form);
       setModal(false);
     } catch (error) {
@@ -44,17 +43,7 @@ const AddItemModal = () => {
       refreshFridgeItems();
       setModal(false);
     }
-  }
-
-  const handleDateValue = () => {
-    if (modalContent) {
-      console.log(modalContent);
-      console.log('modalContent.expire_date: ', modalContent.expiry_date);
-      console.log('formatDate(modalContent.expire_date): ', formatDate(modalContent.expiry_date));
-    }
-    else console.log('no modalContent');
-  }
-
+  };
 
   const handleDisable = (): boolean => {
     if (modalContent) return !verifyDate(modalContent.expiry_date)
@@ -145,12 +134,6 @@ const AddItemModal = () => {
                 }
               />
             </div>
-            <button
-              type="button"
-              onClick={() => handleDateValue()}
-            >
-              verify date
-            </button>
             <button
               type="button"
               onClick={() =>
