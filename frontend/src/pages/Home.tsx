@@ -9,8 +9,7 @@ const Home = () => {
     <>
       <h1>Fridge</h1>
       <Table />
-      {modal &&
-        <AddItemModal />}
+      {modal && <AddItemModal />}
     </>
   )
 }

@@ -16,7 +16,7 @@ export class FridgeModel {
     };
   }
 
-  async finById(id: number): Promise<QueryResult> {
+  async findById(id: number): Promise<QueryResult> {
     const [rows] = await connection.promise().query('SELECT * FROM fridge.items WHERE id = ?', [id]);
 
     return <QueryResult>[rows];

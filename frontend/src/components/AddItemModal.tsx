@@ -2,7 +2,7 @@ import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 import { useState } from 'react';
 import { useModal } from '../context/ModalContext';
 import './AddItemModal.css';
-import { ApiService } from '../utils';
+import { ApiService, formatDate, verifyDate } from '../utils';
 import { useFridge } from '../context/FridgeContext';
 
 const AddItemModal = () => {
@@ -18,6 +18,7 @@ const AddItemModal = () => {
 
   const addItem = async () => {
     try {
+      console.log(form);
       await new ApiService().post('/', form);
       setModal(false);
     } catch (error) {
@@ -32,6 +33,33 @@ const AddItemModal = () => {
       refreshFridgeItems();
     }
   };
+
+  const editItem = async () => {
+    try {
+      await new ApiService().put(`/${modalContent?.id}`, modalContent);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      cleanModal();
+      refreshFridgeItems();
+      setModal(false);
+    }
+  }
+
+  const handleDateValue = () => {
+    if (modalContent) {
+      console.log(modalContent);
+      console.log('modalContent.expire_date: ', modalContent.expiry_date);
+      console.log('formatDate(modalContent.expire_date): ', formatDate(modalContent.expiry_date));
+    }
+    else console.log('no modalContent');
+  }
+
+
+  const handleDisable = (): boolean => {
+    if (modalContent) return !verifyDate(modalContent.expiry_date)
+    return !form.name || !form.quantity || !form.expiry_date || !form.type;
+  }
 
   return (
     <>
@@ -61,8 +89,8 @@ const AddItemModal = () => {
                 id="name"
                 onChange={(e) => {
                   modalContent ?
-                  setModalContent({ ...modalContent, name: e.target.value}):
-                  setForm({ ...form, name: e.target.value });
+                    setModalContent({ ...modalContent, name: e.target.value }) :
+                    setForm({ ...form, name: e.target.value });
                 }}
                 value={modalContent?.name}
               />
@@ -74,9 +102,11 @@ const AddItemModal = () => {
                 className="form-input"
                 id="quantity"
                 onChange={(e) => {
-                  setForm({ ...form, quantity: Number(e.target.value) });
+                  modalContent ?
+                    setModalContent({ ...modalContent, quantity: Number(e.target.value) }) :
+                    setForm({ ...form, quantity: Number(e.target.value) });
                 }}
-                placeholder={modalContent?.quantity.toString()}
+                value={modalContent?.quantity}
               />
             </div>
             <div>
@@ -85,8 +115,11 @@ const AddItemModal = () => {
                 className="form-input"
                 id="type"
                 onChange={(e) => {
-                  setForm({ ...form, type: e.target.value as FridgeItem['type'] });
+                  modalContent ?
+                    setModalContent({ ...modalContent, type: e.target.value as FridgeItem['type'] }) :
+                    setForm({ ...form, type: e.target.value as FridgeItem['type'] });
                 }}
+                value={modalContent?.type}
               >
                 <option value="food">Food</option>
                 <option value="vegetable">Vegetable</option>
@@ -102,20 +135,35 @@ const AddItemModal = () => {
                 className="form-input"
                 id="expiry"
                 onChange={(e) => {
-                  setForm({ ...form, expiry_date: e.target.value });
+                  modalContent ?
+                    setModalContent({ ...modalContent, expiry_date: e.target.value }) :
+                    setForm({ ...form, expiry_date: e.target.value });
                 }}
+                value={
+                  modalContent ? formatDate(modalContent.expiry_date) :
+                    form.expiry_date
+                }
               />
             </div>
             <button
               type="button"
-              onClick={() => addItem()}
-              disabled={
-                form.name === '' ||
-                form.expiry_date === '' ||
-                form.quantity === 0
-              }
+              onClick={() => handleDateValue()}
             >
-              Add
+              verify date
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                modalContent ?
+                  editItem() :
+                  addItem()}
+              disabled={handleDisable()}
+            >
+              {
+                modalContent ?
+                  'Edit' :
+                  'Add'
+              }
             </button>
           </form>
         </div>

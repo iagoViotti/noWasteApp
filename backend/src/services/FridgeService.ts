@@ -1,5 +1,6 @@
 import { FridgeModel } from '../models/FridgeModel';
 import { FridgeItem } from '../interfaces/itemInterface';
+import { verifyDate } from '../util/verifyDate'
 
 export default class FridgeService {
   constructor(
@@ -26,12 +27,18 @@ export default class FridgeService {
   }
 
   async update(id: number, body: FridgeItem) {
-    const item = await this.fridgeModel.finById(id);
+    const item = await this.fridgeModel.findById(id);
 
     if (!item) {
       return { status: 'NOT_FOUND', data: { message: `Item not found` } }
     }
 
+    const dateIsValid = verifyDate(body.expiry_date);
+    
+    if (!dateIsValid) {
+      return { status: 'FORBIDDEN', data: { message: `Invalid date format` } }
+    }
+    
     const updatedItem = await this.fridgeModel.update(body, id);
     return { status: 'SUCCESSFUL', data: updatedItem }
 
@@ -43,7 +50,7 @@ export default class FridgeService {
   }
 
   async deleteOne(id: number) {
-    const item = await this.fridgeModel.finById(id);
+    const item = await this.fridgeModel.findById(id);
 
     if (!item) {
       return { status: 'NOT_FOUND', data: { message: `Item not found` } }
