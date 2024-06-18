@@ -59,4 +59,13 @@ export default class FridgeService {
     await this.fridgeModel.delete(id);
     return { status: 'SUCCESSFUL', data: { message: `Item deleted` } }
   }
+
+  async deleteMultiple(ids: number[]) {
+    if (!ids) {
+      return { status: 'NOT_FOUND', data: { message: `Items not found` } }
+    }
+  
+    await this.fridgeModel.deleteMultiple(ids);
+    return { status: 'SUCCESSFUL', data: { message: `Items deleted` } }
+  }
 }

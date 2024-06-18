@@ -63,11 +63,6 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
       <td>{type}</td>
       <td>
         <button
-          onClick={() => handleEdit()}
-        >Editar</button>
-      </td>
-      <td>
-        <button
           style={{ backgroundColor: 'firebrick', border: 'none' }}
           onClick={() => {
             handleDelete();
@@ -75,6 +70,11 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
         >
           <img src={trash} alt="trash" />
         </button>
+      </td>
+      <td>
+        <button
+          onClick={() => handleEdit()}
+        >...</button>
       </td>
     </tr>
   );

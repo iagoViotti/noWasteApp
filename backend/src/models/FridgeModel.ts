@@ -44,4 +44,8 @@ export class FridgeModel {
   async delete(id: number): Promise<void> {    
     await connection.promise().query('DELETE FROM fridge.items WHERE id = ?', [id]);
   }
+
+  async deleteMultiple(ids: number[]): Promise<void> {
+    await connection.promise().query('DELETE FROM fridge.items WHERE id IN (?)', [ids]);
+  }
 }

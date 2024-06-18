@@ -26,6 +26,10 @@ class ApiService {
   public async delete(url: string) {
     return await this.api.delete(url);
   }
+
+  public async deleteMany(url: string, body: number[]) {
+    return await this.api.delete(url, { data: body });
+  }
 }
 
 export default ApiService;
