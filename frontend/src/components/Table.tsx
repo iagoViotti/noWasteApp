@@ -6,13 +6,14 @@ import { IMapSortOrder } from '../interfaces/utilsInterfaces';
 import ApiService from '../utils/requests';
 import { useModal } from '../context/ModalContext';
 import { useSelect } from '../context/SelectContext';
+import trash from '../assets/trash.svg';
 
 const Table = () => {
   const { fridgeItems, refreshFridgeItems } = useFridge();
   const [sortBy, setSortBy] = useState<string>('expiry_date');
   const [sortOrder, setSortOrder] = useState<string>('asc');
   const { setModal } = useModal()
-  const { setSelectedItems } = useSelect();
+  const { selectedItems, setSelectedItems } = useSelect();
 
   const mapSortOrder: IMapSortOrder = {
     asc: 1,
@@ -40,6 +41,16 @@ const Table = () => {
         return []
       }
     })
+  }
+
+  const handleDeleteMultiple = async () => {
+    const ids = selectedItems.map((i) => i.id) as number[];
+    try {
+      await new ApiService().deleteMany('/deleteMultiple/', ids);
+      refreshFridgeItems();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -82,9 +93,18 @@ const Table = () => {
               />
             </th>
             <th>Nome</th>
-            <th>Quantidade</th>
+            <th>Qtd.</th>
             <th>Data de Validade</th>
             <th>Tipo</th>
+            <th>
+              <button
+                style={{ border: '1px solid white' }}
+                onClick={() => handleDeleteMultiple()}
+                disabled={selectedItems.length === 0}
+              >
+                <img src={trash} alt="trash" />
+              </button></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

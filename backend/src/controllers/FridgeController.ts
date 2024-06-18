@@ -3,9 +3,9 @@ import FridgeService from '../services/FridgeService';
 import { getHTTPStatusMessage } from '../util/HTTPMapStatus';
 
 export class FridgeController {
-  constructor (
+  constructor(
     private fridgeService = new FridgeService(),
-  ) {}
+  ) { }
 
   public async addItem(req: Request, res: Response) {
     const { body } = req;
@@ -24,15 +24,21 @@ export class FridgeController {
     const response = await this.fridgeService.update(parseInt(id), body);
     return res.status(getHTTPStatusMessage(response.status)).send(response.data);
   }
-  
+
   public async deleteAll(req: Request, res: Response) {
     const response = await this.fridgeService.deleteAll();
     return res.status(getHTTPStatusMessage(response.status)).send(response.data);
   }
-  
+
   public async deleteOne(req: Request, res: Response) {
     const { id } = req.params;
     const response = await this.fridgeService.deleteOne(parseInt(id));
+    return res.status(getHTTPStatusMessage(response.status)).send(response.data);
+  }
+
+  public async deleteMultiple(req: Request, res: Response) {
+    const { body } = req;
+    const response = await this.fridgeService.deleteMultiple(body);
     return res.status(getHTTPStatusMessage(response.status)).send(response.data);
   }
 }

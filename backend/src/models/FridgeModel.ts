@@ -16,7 +16,7 @@ export class FridgeModel {
     };
   }
 
-  async finById(id: number): Promise<QueryResult> {
+  async findById(id: number): Promise<QueryResult> {
     const [rows] = await connection.promise().query('SELECT * FROM fridge.items WHERE id = ?', [id]);
 
     return <QueryResult>[rows];
@@ -43,5 +43,9 @@ export class FridgeModel {
   
   async delete(id: number): Promise<void> {    
     await connection.promise().query('DELETE FROM fridge.items WHERE id = ?', [id]);
+  }
+
+  async deleteMultiple(ids: number[]): Promise<void> {
+    await connection.promise().query('DELETE FROM fridge.items WHERE id IN (?)', [ids]);
   }
 }
