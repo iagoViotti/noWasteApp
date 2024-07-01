@@ -5,3 +5,7 @@ export interface IMapSortOrder {
 export interface ModalProviderProps {
   children: React.ReactNode;
 }
+
+export interface ScanProviderProps {
+  children: React.ReactNode;
+}

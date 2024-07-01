@@ -16,13 +16,14 @@ export const useModal = () => {
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [modal, setModal] = useState(false);
   const [modalContent, setModalContent] = useState<FridgeItem | undefined>(undefined);
+  const [scan, setScan] = useState(false);
 
   const cleanModal = () => {
     setModalContent(undefined);
   }
   
   return (
-    <ModalContext.Provider value={{ modal, setModal, modalContent, setModalContent, cleanModal }}>
+    <ModalContext.Provider value={{ modal, setModal, modalContent, setModalContent, cleanModal, scan, setScan }}>
       {children}
     </ModalContext.Provider>
   );

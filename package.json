@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "init-database": "docker-compose exec backend npm run init-db && docker-compose exec backend npm run migrate",
-    "compose:up": "docker-compose up -d --build && npm run init-database",
+    "seed": "docker-compose exec backend npm run seed",
+    "compose:up": "docker-compose up -d --build && npm run init-database && npm run seed",
     "compose:down": "docker-compose down --remove-orphans",
-    "compose:logs": "docker-compose logs -f",
-    "logs": "docker-compose logs -f",
-    "seed": "docker-compose exec backend npm run seed"
+    "logs": "docker-compose logs -f"
   },
   "keywords": [],
   "author": "",

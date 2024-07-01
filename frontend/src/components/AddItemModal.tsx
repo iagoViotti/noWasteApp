@@ -148,6 +148,14 @@ const AddItemModal = () => {
                   'Add'
               }
             </button>
+            {/* {
+              !modalContent &&
+              <button
+                type="button"
+                onClick={() => setScan(true)}
+              >
+              Scan
+            </button>} */}
           </form>
         </div>
       </div>
