@@ -1,1 +1,1 @@
-INSERT INTO fridge.items (name, quantity, expiry_date, type) VALUES ('Apple', '6', '2024-11-30', 'hortifruti'),('Water', '3', '2024-12-06', 'bebida'),('Chocolight', '2', '2024-11-30', 'outro'),('cenoura', '2', '2024-06-18', 'hortifruti'),('ratatuille', '1', '2024-07-03', 'pronta');
+INSERT INTO fridge.items (name, quantity, expiry_date, type) VALUES ('Apple', '6', '2024-11-30', 'hortifruti'),('ratatuille', '1', '2024-07-03', 'pronta'),('Water', '3', '2024-12-06', 'bebida'),('batatata', '2', '2024-07-19', 'hortifruti');
