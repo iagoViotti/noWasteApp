@@ -1,6 +1,6 @@
 import * as fs from 'fs';
-import * as path from 'path';
-import connection from './database';
+// import * as path from 'path';
+// import connection from './database';
 import { createPool } from 'mysql2';
 
 async function createConnection() {

@@ -4,6 +4,7 @@ import trash from '../assets/trash.svg';
 import { useFridge } from '../context/FridgeContext';
 import { useSelect } from '../context/SelectContext';
 import { useModal } from '../context/ModalContext';
+import { ellipsis } from '../assets/';
 
 const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
   const { refreshFridgeItems } = useFridge();
@@ -24,8 +25,8 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
     if (days < 0)
       return `red`
     if (days < 20)
-      return `hsl(${mapRange(days, 0, 20, 0, 70)}, 100%, 70%)`
-    return 'antiquewhite'
+      return `hsla(${mapRange(days, 0, 20, 0, 70)}, 100%, 65%, 0.8)`
+    return 'hsla(34, 78%, 91%, 0.5)'
   }
 
   const handleSelect = (checked: boolean) => {
@@ -47,7 +48,7 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
     <tr
       style={{
         backgroundColor: mapColorByDate(deltaTimeInDays(expiry_date)),
-        color: 'black'
+        userSelect: 'none'
       }}
     >
       <td>
@@ -63,10 +64,10 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
       <td>{type}</td>
       <td>
         <button
-          style={{ backgroundColor: 'firebrick', border: 'none' }}
           onClick={() => {
             handleDelete();
           }}
+          className={`delete-button ${deltaTimeInDays(expiry_date) < 0 ? 'delete-button-expired' : ''}`}
         >
           <img src={trash} alt="trash" />
         </button>
@@ -74,7 +75,11 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
       <td>
         <button
           onClick={() => handleEdit()}
-        >...</button>
+          className='edit-button'
+        >
+          <img src={ellipsis} alt="trash" />
+
+        </button>
       </td>
     </tr>
   );

@@ -1,6 +1,7 @@
 import { FridgeModel } from '../models/FridgeModel';
 import { FridgeItem } from '../interfaces/itemInterface';
 import { verifyDate } from '../util/verifyDate'
+import { writeSeed } from '../database/sql/writeSeed';
 
 export default class FridgeService {
   constructor(
@@ -34,11 +35,11 @@ export default class FridgeService {
     }
 
     const dateIsValid = verifyDate(body.expiry_date);
-    
+
     if (!dateIsValid) {
       return { status: 'FORBIDDEN', data: { message: `Invalid date format` } }
     }
-    
+
     const updatedItem = await this.fridgeModel.update(body, id);
     return { status: 'SUCCESSFUL', data: updatedItem }
 
@@ -64,8 +65,17 @@ export default class FridgeService {
     if (!ids) {
       return { status: 'NOT_FOUND', data: { message: `Items not found` } }
     }
-  
+
     await this.fridgeModel.deleteMultiple(ids);
     return { status: 'SUCCESSFUL', data: { message: `Items deleted` } }
+  }
+
+  async save() {
+    const db = await this.fridgeModel.findAll();
+    if (!db) {
+      return { status: 'NOT_FOUND', data: { message: `Items not found` } }
+    }
+    await writeSeed(db);
+    return { status: 'SUCCESSFUL', data: db }
   }
 }

@@ -2,23 +2,18 @@ import { useEffect, useState } from 'react';
 import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 import { useFridge } from '../context/FridgeContext';
 import FridgeItemRow from './TableRowComponent'
-import { IMapSortOrder } from '../interfaces/utilsInterfaces';
 import ApiService from '../utils/requests';
 import { useModal } from '../context/ModalContext';
 import { useSelect } from '../context/SelectContext';
-import trash from '../assets/trash.svg';
+import { trash, upanddown, downandup } from '../assets'
+import './Table.css'
 
 const Table = () => {
   const { fridgeItems, refreshFridgeItems } = useFridge();
   const [sortBy, setSortBy] = useState<string>('expiry_date');
-  const [sortOrder, setSortOrder] = useState<string>('asc');
+  const [sortOrder, setSortOrder] = useState<number>(1);
   const { setModal } = useModal()
   const { selectedItems, setSelectedItems } = useSelect();
-
-  const mapSortOrder: IMapSortOrder = {
-    asc: 1,
-    desc: -1,
-  };
 
   useEffect(() => {
     refreshFridgeItems();
@@ -66,13 +61,6 @@ const Table = () => {
           <option value="quantity">Quantidade</option>
           <option value="type">Tipo</option>
         </select>
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="asc">Crescente</option>
-          <option value="desc">Decrescente</option>
-        </select>
         <button
           onClick={cleanFridge}
         >
@@ -83,7 +71,9 @@ const Table = () => {
         >Adicionar Item
         </button>
       </div>
-      <table>
+      <table
+        id='table'
+      >
         <thead>
           <tr>
             <th>
@@ -94,25 +84,32 @@ const Table = () => {
             </th>
             <th>Nome</th>
             <th>Qtd.</th>
-            <th>Data de Validade</th>
+            <th>Validade</th>
             <th>Tipo</th>
             <th>
               <button
-                style={{ border: '1px solid white' }}
                 onClick={() => handleDeleteMultiple()}
                 disabled={selectedItems.length === 0}
+                className='delete-button'
               >
                 <img src={trash} alt="trash" />
               </button></th>
-            <th></th>
+            <th>
+              <button
+                onClick={() => setSortOrder(sortOrder * -1)}
+                className='sort-button'
+              >
+                <img src={sortOrder === -1 ? upanddown : downandup} alt="up and down arrow" />
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
           {fridgeItems &&
             fridgeItems
               .sort((a: FridgeItem, b: FridgeItem) => {
-                if (a[sortBy] > b[sortBy]) return (1 * mapSortOrder[sortOrder])
-                if (a[sortBy] < b[sortBy]) return (-1 * mapSortOrder[sortOrder])
+                if (a[sortBy] > b[sortBy]) return (1 * sortOrder)
+                if (a[sortBy] < b[sortBy]) return (-1 * sortOrder)
                 return 0;
               })
               .map((item: FridgeItem) => (

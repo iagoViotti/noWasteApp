@@ -1,13 +1,16 @@
 import AddItemModal from "../components/AddItemModal"
+import Header from "../components/Header"
 import Table from "../components/Table"
 import { useModal } from "../context/ModalContext"
+// import BarcodeScanner from "../components/BarcodeScanner";
 
 const Home = () => {
-  const { modal } = useModal()
+  const { modal } = useModal();
 
   return (
     <>
-      <h1>Fridge</h1>
+      {/* {scan && <BarcodeScanner />} */}
+      <Header />
       <Table />
       {modal && <AddItemModal />}
     </>

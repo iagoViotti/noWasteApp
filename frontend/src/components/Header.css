@@ -1,0 +1,14 @@
+header {
+  background-color: green;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  position: sticky;
+  top: 0;
+}
+
+header h1 {
+  color: white;
+  margin: 0;
+  padding: 10px;
+}

@@ -3,6 +3,6 @@ export interface FridgeItem {
   name: string;
   quantity: number;
   expiry_date: string;
-  type?: 'food' | 'vegetable' | 'fruit' | 'beverage' | 'other';
+  type?: 'pronta' | 'hortifruti' | 'bebida' | 'doce' |'outro' | 'carne' | 'grão'
   [key: string]: any;
 }

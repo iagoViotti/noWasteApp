@@ -12,7 +12,7 @@ const AddItemModal = () => {
     name: '',
     quantity: 1,
     expiry_date: '',
-    type: 'food',
+    type: 'pronta',
   });
 
 
@@ -27,7 +27,7 @@ const AddItemModal = () => {
         name: '',
         quantity: 1,
         expiry_date: '',
-        type: 'food',
+        type: 'pronta',
       });
       refreshFridgeItems();
     }
@@ -110,11 +110,13 @@ const AddItemModal = () => {
                 }}
                 value={modalContent?.type}
               >
-                <option value="food">Food</option>
-                <option value="vegetable">Vegetable</option>
-                <option value="fruit">Fruit</option>
-                <option value="beverage">Beverage</option>
-                <option value="other">Other</option>
+                <option value="pronta">Pronta</option>
+                <option value="hortifruti">Hortifruti</option>
+                <option value="bebida">Bebida</option>
+                <option value="doce">Doce</option>
+                <option value="carne">Carne</option>
+                <option value="grão">Grão</option>
+                <option value="outro">Outro</option>
               </select>
             </div>
             <div>
@@ -148,6 +150,14 @@ const AddItemModal = () => {
                   'Add'
               }
             </button>
+            {/* {
+              !modalContent &&
+              <button
+                type="button"
+                onClick={() => setScan(true)}
+              >
+              Scan
+            </button>} */}
           </form>
         </div>
       </div>
