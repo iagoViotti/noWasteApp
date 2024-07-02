@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS items (
   name VARCHAR(255) NOT NULL,
   quantity INT NOT NULL,
   expiry_date DATE NOT NULL,
-  type ENUM('food', 'vegetable', 'fruit', 'beverage', 'other') NOT NULL
+  type ENUM('grão','carne', 'hortifruti', 'bebida', 'doce', 'pronta', 'outro' ) NOT NULL
 )
