@@ -8,6 +8,9 @@ import pronta from './pronta.svg';
 import hortifruti from './hortifruti.svg';
 import bebida from './bebida.svg';
 import doce from './doce.svg';
+import grao from './grao.svg';
+import carne from './carne.svg';
+import outro from './outro.svg';
 
 export {
   ellipsis,
@@ -19,5 +22,8 @@ export {
   pronta,
   hortifruti,
   bebida,
-  doce
+  doce,
+  grao,
+  carne,
+  outro
 }
