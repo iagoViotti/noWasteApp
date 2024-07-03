@@ -1,14 +1,37 @@
 header {
-  background-color: green;
+  /* background-color: green; */
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   position: sticky;
   top: 0;
+  padding-top: 1em;
+  flex-direction: row;
+  align-items: center;
 }
 
 header h1 {
-  color: white;
-  margin: 0;
-  padding: 10px;
+  margin: 0 0 0 0.5em;
+  padding: 10px 0;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 3.5em;
+}
+
+.header-buttons {
+  display: flex;
+  flex-direction: row;
+  margin: 0 1em 0 0;
+}
+
+header button {
+  height: 45px;
+  width: 45px;
+  display: flex;
+  border-radius: 10%;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
 }

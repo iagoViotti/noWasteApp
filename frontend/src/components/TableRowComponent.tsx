@@ -4,7 +4,7 @@ import trash from '../assets/trash.svg';
 import { useFridge } from '../context/FridgeContext';
 import { useSelect } from '../context/SelectContext';
 import { useModal } from '../context/ModalContext';
-import { ellipsis } from '../assets/';
+import { ellipsis, pronta, hortifruti, bebida, doce } from '../assets/';
 
 const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
   const { refreshFridgeItems } = useFridge();
@@ -44,6 +44,16 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
     setModal(true)
   }
 
+  const mapType: { [key: string]: string } = {
+    'pronta': pronta,
+    'hortifruti': hortifruti,
+    'bebida': bebida,
+    'doce': doce,
+    // 'outro': outro,
+    // 'carne': carne,
+    // 'grão': grão,
+  }
+
   return (
     <tr
       style={{
@@ -61,16 +71,17 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
       <td>{name}</td>
       <td>{quantity}</td>
       <td>{handleDate(expiry_date)}</td>
-      <td>{type}</td>
       <td>
-        <button
-          onClick={() => {
-            handleDelete();
-          }}
-          className={`delete-button ${deltaTimeInDays(expiry_date) < 0 ? 'delete-button-expired' : ''}`}
+        {
+          type
+          &&
+          <img src={mapType[type]} alt={type} />
+        }
+        <div
+          className='tooltip'
         >
-          <img src={trash} alt="trash" />
-        </button>
+          {type}
+        </div>
       </td>
       <td>
         <button
@@ -79,6 +90,16 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
         >
           <img src={ellipsis} alt="trash" />
 
+        </button>
+      </td>
+      <td>
+        <button
+          onClick={() => {
+            handleDelete();
+          }}
+          className={`delete-button ${deltaTimeInDays(expiry_date) < 0 ? 'delete-button-expired' : ''}`}
+        >
+          <img src={trash} alt="trash" />
         </button>
       </td>
     </tr>

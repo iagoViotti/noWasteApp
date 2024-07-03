@@ -3,12 +3,12 @@
 :root {
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   /* font-family: Noto Serif, serif; */
-  font-family: 'Arsenal SC', serif;
+  /* font-family: 'Arsenal SC', serif; */
   line-height: 1.5;
   font-weight: 600;
 
   color: rgb(58, 58, 58);
-  background-color: #dbdbdb;
+  background-color: #e7e7e7;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

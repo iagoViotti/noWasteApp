@@ -52,105 +52,108 @@ const AddItemModal = () => {
 
   return (
     <>
-      <div className="modal-container">
-        <div className="modal-header">
-          <h4 className="modal-title" id="addItemModalLabel">
-            Add Item
-          </h4>
-          <button
-            type="button"
-            className="btn-close"
-            onClick={() => {
-              cleanModal()
-              setModal(false)
-            }}
-          >
-            X
-          </button>
-        </div>
-        <div className="modal-body">
-          <form>
-            <div>
-              <label htmlFor="name" className="form-label">Name</label>
-              <input
-                type="text"
-                className="form-input"
-                id="name"
-                onChange={(e) => {
-                  modalContent ?
-                    setModalContent({ ...modalContent, name: e.target.value }) :
-                    setForm({ ...form, name: e.target.value });
-                }}
-                value={modalContent?.name}
-              />
-            </div>
-            <div>
-              <label htmlFor="quantity" className="form-label">Quantity</label>
-              <input
-                type="number"
-                className="form-input"
-                id="quantity"
-                onChange={(e) => {
-                  modalContent ?
-                    setModalContent({ ...modalContent, quantity: Number(e.target.value) }) :
-                    setForm({ ...form, quantity: Number(e.target.value) });
-                }}
-                value={modalContent?.quantity}
-              />
-            </div>
-            <div>
-              <label htmlFor="type" className="form-label">Type</label>
-              <select
-                className="form-input"
-                id="type"
-                onChange={(e) => {
-                  modalContent ?
-                    setModalContent({ ...modalContent, type: e.target.value as FridgeItem['type'] }) :
-                    setForm({ ...form, type: e.target.value as FridgeItem['type'] });
-                }}
-                value={modalContent?.type}
-              >
-                <option value="pronta">Pronta</option>
-                <option value="hortifruti">Hortifruti</option>
-                <option value="bebida">Bebida</option>
-                <option value="doce">Doce</option>
-                <option value="carne">Carne</option>
-                <option value="grão">Grão</option>
-                <option value="outro">Outro</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="expiry" className="form-label">Expiry</label>
-              <input
-                type="date"
-                className="form-input"
-                id="expiry"
-                onChange={(e) => {
-                  modalContent ?
-                    setModalContent({ ...modalContent, expiry_date: e.target.value }) :
-                    setForm({ ...form, expiry_date: e.target.value });
-                }}
-                value={
-                  modalContent ? formatDate(modalContent.expiry_date) :
-                    form.expiry_date
-                }
-              />
-            </div>
+      <div
+        className="modal-overlay"
+      >
+        <div className="modal-container">
+          <div className="modal-header">
+            <h4 className="modal-title" id="addItemModalLabel">
+              Add Item
+            </h4>
             <button
               type="button"
-              onClick={() =>
-                modalContent ?
-                  editItem() :
-                  addItem()}
-              disabled={handleDisable()}
+              className="btn-close"
+              onClick={() => {
+                cleanModal()
+                setModal(false)
+              }}
             >
-              {
-                modalContent ?
-                  'Edit' :
-                  'Add'
-              }
+              X
             </button>
-            {/* {
+          </div>
+          <div className="modal-body">
+            <form>
+              <div>
+                <label htmlFor="name" className="form-label">Name</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  id="name"
+                  onChange={(e) => {
+                    modalContent ?
+                      setModalContent({ ...modalContent, name: e.target.value }) :
+                      setForm({ ...form, name: e.target.value });
+                  }}
+                  value={modalContent?.name}
+                />
+              </div>
+              <div>
+                <label htmlFor="quantity" className="form-label">Quantity</label>
+                <input
+                  type="number"
+                  className="form-input"
+                  id="quantity"
+                  onChange={(e) => {
+                    modalContent ?
+                      setModalContent({ ...modalContent, quantity: Number(e.target.value) }) :
+                      setForm({ ...form, quantity: Number(e.target.value) });
+                  }}
+                  value={modalContent?.quantity}
+                />
+              </div>
+              <div>
+                <label htmlFor="type" className="form-label">Type</label>
+                <select
+                  className="form-input"
+                  id="type"
+                  onChange={(e) => {
+                    modalContent ?
+                      setModalContent({ ...modalContent, type: e.target.value as FridgeItem['type'] }) :
+                      setForm({ ...form, type: e.target.value as FridgeItem['type'] });
+                  }}
+                  value={modalContent?.type}
+                >
+                  <option value="pronta">Pronta</option>
+                  <option value="hortifruti">Hortifruti</option>
+                  <option value="bebida">Bebida</option>
+                  <option value="doce">Doce</option>
+                  <option value="carne">Carne</option>
+                  <option value="grão">Grão</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="expiry" className="form-label">Expiry</label>
+                <input
+                  type="date"
+                  className="form-input"
+                  id="expiry"
+                  onChange={(e) => {
+                    modalContent ?
+                      setModalContent({ ...modalContent, expiry_date: e.target.value }) :
+                      setForm({ ...form, expiry_date: e.target.value });
+                  }}
+                  value={
+                    modalContent ? formatDate(modalContent.expiry_date) :
+                      form.expiry_date
+                  }
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() =>
+                  modalContent ?
+                    editItem() :
+                    addItem()}
+                disabled={handleDisable()}
+              >
+                {
+                  modalContent ?
+                    'Edit' :
+                    'Add'
+                }
+              </button>
+              {/* {
               !modalContent &&
               <button
                 type="button"
@@ -158,7 +161,8 @@ const AddItemModal = () => {
               >
               Scan
             </button>} */}
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </>

@@ -2,10 +2,22 @@ import ellipsis from './ellipsis.svg';
 import downandup from './downandup.svg';
 import upanddown from './upanddown.svg';
 import trash from './trash.svg';
+import add from './add.svg';
+import save from './save.svg';
+import pronta from './pronta.svg';
+import hortifruti from './hortifruti.svg';
+import bebida from './bebida.svg';
+import doce from './doce.svg';
 
 export {
   ellipsis,
   downandup,
   upanddown,
-  trash
+  trash,
+  add,
+  save,
+  pronta,
+  hortifruti,
+  bebida,
+  doce
 }
