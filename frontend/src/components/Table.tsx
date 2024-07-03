@@ -52,7 +52,7 @@ const Table = () => {
         <div
           className='sort-select'
         >
-          <label>Ordenar por:</label>
+          {/* <label>Ordenar por:</label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
@@ -61,7 +61,7 @@ const Table = () => {
             <option value="name">Nome</option>
             <option value="quantity">Quantidade</option>
             <option value="type">Tipo</option>
-          </select>
+          </select> */}
         </div>
         {/* <button
           onClick={cleanFridge}
@@ -80,10 +80,32 @@ const Table = () => {
                 onChange={(e) => handleSelectAll(e)}
               />
             </th>
-            <th>Nome</th>
-            <th>Qtd.</th>
-            <th>Validade</th>
-            <th>Tipo</th>
+            <th
+              onClick={() => setSortBy('name')}
+              className='sort-header'
+            >
+              <div className={sortBy === 'name' ? 'selected-header' : ''} />
+              Nome
+            </th>
+            <th
+              onClick={() => setSortBy('quantity')}
+              className='sort-header'
+            >
+              <div className={sortBy === 'quantity' ? 'selected-header' : ''} />
+              Qtd.
+            </th>
+            <th
+              onClick={() => setSortBy('expiry_date')}
+              className='sort-header'
+            >
+              <div className={sortBy === 'expiry_date' ? 'selected-header' : ''} />
+              Validade</th>
+            <th
+              onClick={() => setSortBy('type')}
+              className='sort-header'
+            >
+              <div className={sortBy === 'type' ? 'selected-header' : ''} />
+              Tipo</th>
             <th>
               <button
                 onClick={() => setSortOrder(sortOrder * -1)}

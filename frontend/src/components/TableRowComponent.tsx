@@ -4,7 +4,7 @@ import trash from '../assets/trash.svg';
 import { useFridge } from '../context/FridgeContext';
 import { useSelect } from '../context/SelectContext';
 import { useModal } from '../context/ModalContext';
-import { ellipsis, pronta, hortifruti, bebida, doce } from '../assets/';
+import { ellipsis, pronta, hortifruti, bebida, doce, grao, carne, outro } from '../assets/';
 
 const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
   const { refreshFridgeItems } = useFridge();
@@ -49,9 +49,9 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
     'hortifruti': hortifruti,
     'bebida': bebida,
     'doce': doce,
-    // 'outro': outro,
-    // 'carne': carne,
-    // 'grão': grão,
+    'outro': outro,
+    'carne': carne,
+    'grão': grao,
   }
 
   return (
@@ -77,16 +77,20 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
           &&
           <img src={mapType[type]} alt={type} />
         }
-        <div
+        {/* <div
           className='tooltip'
         >
           {type}
-        </div>
+        </div> */}
       </td>
       <td>
         <button
           onClick={() => handleEdit()}
           className='edit-button'
+          style={{
+            backgroundColor: mapColorByDate(deltaTimeInDays(expiry_date)),
+            border: '1px solid hsla(0, 0%, 100%, 0.3)',
+          }}
         >
           <img src={ellipsis} alt="trash" />
 

@@ -5,9 +5,10 @@ header {
   justify-content: space-between;
   position: sticky;
   top: 0;
-  padding-top: 1em;
+  padding-top: 1.5em;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 80px;
 }
 
 header h1 {
@@ -34,4 +35,15 @@ header button {
   margin: 5px;
   justify-content: center;
   align-items: center;
+}
+
+.add {
+  border-color: none;
+  animation: animate 3s;
+}
+
+@keyframes animate {
+  50% {
+    border: 2px solid #7bd07b;
+  }
 }
