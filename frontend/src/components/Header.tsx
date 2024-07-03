@@ -1,7 +1,10 @@
 import { ApiService } from '../utils';
+import { useModal } from '../context/ModalContext';
+import { save, add } from '../assets';
 import './Header.css';
 
 const Header = () => {
+  const { setModal } = useModal()
 
   const handleSave = async () => {
     await new ApiService().get('/save');
@@ -9,13 +12,23 @@ const Header = () => {
 
   return (
     <header>
-      <h1>Fridge</h1>
-      <button
-        className="save-button"
-        onClick={() => handleSave()}
+      <h1>NoWaste</h1>
+      <div
+        className="header-buttons"
       >
-        SAVE
-      </button>
+        <button
+          className="save-button"
+          onClick={() => handleSave()}
+        >
+          <img src={save} alt="save" />
+        </button>
+        <button
+          className="add-button"
+          onClick={() => setModal(true)}
+        >
+          <img src={add} alt="add" />
+        </button>
+      </div>
     </header>
   );
 }

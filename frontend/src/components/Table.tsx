@@ -3,7 +3,6 @@ import { FridgeItem } from '../../../backend/src/interfaces/itemInterface';
 import { useFridge } from '../context/FridgeContext';
 import FridgeItemRow from './TableRowComponent'
 import ApiService from '../utils/requests';
-import { useModal } from '../context/ModalContext';
 import { useSelect } from '../context/SelectContext';
 import { trash, upanddown, downandup } from '../assets'
 import './Table.css'
@@ -12,21 +11,20 @@ const Table = () => {
   const { fridgeItems, refreshFridgeItems } = useFridge();
   const [sortBy, setSortBy] = useState<string>('expiry_date');
   const [sortOrder, setSortOrder] = useState<number>(1);
-  const { setModal } = useModal()
   const { selectedItems, setSelectedItems } = useSelect();
 
   useEffect(() => {
     refreshFridgeItems();
   }, []);
 
-  const cleanFridge = async () => {
-    try {
-      await new ApiService().delete('/')
-      refreshFridgeItems()
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  // const cleanFridge = async () => {
+  //   try {
+  //     await new ApiService().delete('/')
+  //     refreshFridgeItems()
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
 
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedItems(() => {
@@ -51,25 +49,25 @@ const Table = () => {
   return (
     <>
       <div>
-        <label>Ordenar por:</label>
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
+        <div
+          className='sort-select'
         >
-          <option value="expiry_date">Data de Validade</option>
-          <option value="name">Nome</option>
-          <option value="quantity">Quantidade</option>
-          <option value="type">Tipo</option>
-        </select>
-        <button
+          <label>Ordenar por:</label>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="expiry_date">Data de Validade</option>
+            <option value="name">Nome</option>
+            <option value="quantity">Quantidade</option>
+            <option value="type">Tipo</option>
+          </select>
+        </div>
+        {/* <button
           onClick={cleanFridge}
         >
           Limpar Geladeira
-        </button>
-        <button
-          onClick={() => setModal(true)}
-        >Adicionar Item
-        </button>
+        </button> */}
       </div>
       <table
         id='table'
@@ -88,18 +86,19 @@ const Table = () => {
             <th>Tipo</th>
             <th>
               <button
+                onClick={() => setSortOrder(sortOrder * -1)}
+                className='sort-button'
+              >
+                <img src={sortOrder === -1 ? upanddown : downandup} alt="up and down arrow" />
+              </button>
+            </th>
+            <th>
+              <button
                 onClick={() => handleDeleteMultiple()}
                 disabled={selectedItems.length === 0}
                 className='delete-button'
               >
                 <img src={trash} alt="trash" />
-              </button></th>
-            <th>
-              <button
-                onClick={() => setSortOrder(sortOrder * -1)}
-                className='sort-button'
-              >
-                <img src={sortOrder === -1 ? upanddown : downandup} alt="up and down arrow" />
               </button>
             </th>
           </tr>

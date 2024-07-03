@@ -54,10 +54,6 @@ const AddItemModal = () => {
     <>
       <div
         className="modal-overlay"
-        onClick={() => {
-          cleanModal()
-          setModal(false)
-        }}
       >
         <div className="modal-container">
           <div className="modal-header">
