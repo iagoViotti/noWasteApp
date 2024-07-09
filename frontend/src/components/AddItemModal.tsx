@@ -55,11 +55,18 @@ const AddItemModal = () => {
       <div
         className="modal-overlay"
       >
+        <div
+          className="modal-background"
+          onClick={() => {
+            cleanModal()
+            setModal(false)
+          }}
+        />
         <div className="modal-container">
           <div className="modal-header">
-            <h4 className="modal-title" id="addItemModalLabel">
+            <h3 className="modal-title" id="addItemModalLabel">
               Add Item
-            </h4>
+            </h3>
             <button
               type="button"
               className="btn-close"

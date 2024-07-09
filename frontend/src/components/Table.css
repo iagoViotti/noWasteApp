@@ -164,3 +164,11 @@ table tr:last-child td:last-child {
   transform: translate(-50%, -50%);
   /* border-radius: 10px; */
 }
+
+.expired {
+  text-decoration: line-through;
+}
+
+.checkbox:checked {
+  background-color: #7bd07b;
+}

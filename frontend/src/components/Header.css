@@ -1,14 +1,16 @@
 header {
-  /* background-color: green; */
+  background-color: #e7e7e7ec;
   width: 100%;
   display: flex;
   justify-content: space-between;
   position: sticky;
   top: 0;
   padding-top: 1.5em;
+  padding-bottom: 1em;
   flex-direction: row;
   align-items: center;
   margin-bottom: 80px;
+  z-index: 1;
 }
 
 header h1 {
@@ -25,6 +27,7 @@ header h1 {
   margin: 0 1em 0 0;
 }
 
+
 header button {
   height: 45px;
   width: 45px;
@@ -35,6 +38,11 @@ header button {
   margin: 5px;
   justify-content: center;
   align-items: center;
+}
+
+header button:active {
+  transform: scale(0.9);
+  background-color: rgb(226, 226, 226);
 }
 
 .add {
