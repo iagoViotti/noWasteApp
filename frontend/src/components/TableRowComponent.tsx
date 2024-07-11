@@ -66,12 +66,19 @@ const FridgeItemRow = ({ item }: FridgeItemRowProps) => {
           type="checkbox"
           onChange={(e) => { handleSelect(e.target.checked) }}
           checked={selectedItems.some((i) => i.id === id)}
+          className='checkbox'
         />
       </td>
-      <td>{name}</td>
-      <td>{quantity}</td>
-      <td>{handleDate(expiry_date)}</td>
-      <td>
+      <td
+        className={`${deltaTimeInDays(expiry_date) < 0 ? 'expired' : ''}`}
+      >{name}</td>
+      <td
+        className={`${deltaTimeInDays(expiry_date) < 0 ? 'expired' : ''}`}
+      >{quantity}</td>
+      <td
+        className={`${deltaTimeInDays(expiry_date) < 0 ? 'expired' : ''}`}
+      >{handleDate(expiry_date)}</td>
+      <td   >
         {
           type
           &&

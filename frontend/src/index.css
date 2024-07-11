@@ -1,14 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif&display=swap');
 
+@font-face {
+  font-family: 'Miracle Fairway';
+  src: url('../public/fonts/MiracleFairwayPersonalUse-lg020.otf') format('opentype'),
+}
+
 :root {
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
-  /* font-family: Noto Serif, serif; */
-  /* font-family: 'Arsenal SC', serif; */
   line-height: 1.5;
   font-weight: 600;
 
-  color: rgb(58, 58, 58);
-  background-color: #e7e7e7;
+  /* color: rgb(58, 58, 58); */
+  color: hsl(22, 33%, 30%);
+  background-color: hsl(35, 100%, 95%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,6 +33,11 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: Miracle Fairway;
+}
+
+h3 {
+  font-family: Miracle Fairway;
 }
 
 button:disabled {

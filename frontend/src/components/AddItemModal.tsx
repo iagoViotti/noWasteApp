@@ -55,11 +55,18 @@ const AddItemModal = () => {
       <div
         className="modal-overlay"
       >
+        <div
+          className="modal-background"
+          onClick={() => {
+            cleanModal()
+            setModal(false)
+          }}
+        />
         <div className="modal-container">
           <div className="modal-header">
-            <h4 className="modal-title" id="addItemModalLabel">
-              Add Item
-            </h4>
+            <h3 className="modal-title" id="addItemModalLabel">
+              novo Item
+            </h3>
             <button
               type="button"
               className="btn-close"
@@ -73,8 +80,10 @@ const AddItemModal = () => {
           </div>
           <div className="modal-body">
             <form>
-              <div>
-                <label htmlFor="name" className="form-label">Name</label>
+              <div
+                className='input-container'
+              >
+                <label htmlFor="name" className="form-label">Nome:</label>
                 <input
                   type="text"
                   className="form-input"
@@ -87,8 +96,10 @@ const AddItemModal = () => {
                   value={modalContent?.name}
                 />
               </div>
-              <div>
-                <label htmlFor="quantity" className="form-label">Quantity</label>
+              <div
+                className='input-container'
+              >
+                <label htmlFor="quantity" className="form-label">Quantidade:</label>
                 <input
                   type="number"
                   className="form-input"
@@ -101,8 +112,10 @@ const AddItemModal = () => {
                   value={modalContent?.quantity}
                 />
               </div>
-              <div>
-                <label htmlFor="type" className="form-label">Type</label>
+              <div
+                className='input-container'
+              >
+                <label htmlFor="type" className="form-label">Tipo:</label>
                 <select
                   className="form-input"
                   id="type"
@@ -122,8 +135,10 @@ const AddItemModal = () => {
                   <option value="outro">Outro</option>
                 </select>
               </div>
-              <div>
-                <label htmlFor="expiry" className="form-label">Expiry</label>
+              <div
+                className='input-container'
+              >
+                <label htmlFor="expiry" className="form-label">Validade:</label>
                 <input
                   type="date"
                   className="form-input"
@@ -139,28 +154,24 @@ const AddItemModal = () => {
                   }
                 />
               </div>
-              <button
-                type="button"
-                onClick={() =>
-                  modalContent ?
-                    editItem() :
-                    addItem()}
-                disabled={handleDisable()}
+              <div
+                className='button-container'
               >
-                {
-                  modalContent ?
-                    'Edit' :
-                    'Add'
-                }
-              </button>
-              {/* {
-              !modalContent &&
-              <button
-                type="button"
-                onClick={() => setScan(true)}
-              >
-              Scan
-            </button>} */}
+                <button
+                  type="button"
+                  onClick={() =>
+                    modalContent ?
+                      editItem() :
+                      addItem()}
+                  disabled={handleDisable()}
+                >
+                  {
+                    modalContent ?
+                      'Edit' :
+                      'Add'
+                  }
+                </button>
+              </div>
             </form>
           </div>
         </div>
