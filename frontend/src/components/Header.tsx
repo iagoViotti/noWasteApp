@@ -17,10 +17,10 @@ const Header = () => {
       setAnimate(!animate)
     }, 2000)
   }, [])
-
+  
   return (
     <header>
-      <h1>NoWaste</h1>
+      <h1>noWaste</h1>
       <div
         className="header-buttons"
       >

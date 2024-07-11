@@ -1,24 +1,24 @@
 header {
-  background-color: #e7e7e7ec;
+  /* background-color: hsla(0, 0%, 91%, 0.925); */
+  background-color: hsla(35, 100%, 95%, 0.95);
   width: 100%;
   display: flex;
   justify-content: space-between;
   position: sticky;
   top: 0;
-  padding-top: 1.5em;
-  padding-bottom: 1em;
+  
   flex-direction: row;
   align-items: center;
-  margin-bottom: 80px;
+  margin: 40px 0;
   z-index: 1;
 }
 
 header h1 {
   margin: 0 0 0 0.5em;
   padding: 10px 0;
-  font-weight: 700;
   font-style: italic;
   font-size: 3.5em;
+  color: rgb(163, 112, 83);
 }
 
 .header-buttons {
@@ -34,7 +34,9 @@ header button {
   display: flex;
   border-radius: 10%;
   cursor: pointer;
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
+  /* background-color: hsla(0, 0%, 100%, 0.90); */
+  background-color: rgba(255, 248, 219, 0.425);
   margin: 5px;
   justify-content: center;
   align-items: center;
