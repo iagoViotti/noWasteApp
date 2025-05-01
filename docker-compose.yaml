@@ -3,7 +3,7 @@ services:
   frontend:
     container_name: nwapp_frontend
     build: frontend/
-    restart: always
+    # restart: always
     ports:
       - 5173:5173
     working_dir: /frontend
@@ -19,7 +19,7 @@ services:
   backend:
     container_name: nwapp_backend
     build: backend/
-    restart: always
+    # restart: always
     ports:
       - 3010:3010
     working_dir: /backend
@@ -40,7 +40,7 @@ services:
   database:
     image: mysql:8.0.32
     container_name: db
-    restart: always
+    # restart: always
     ports:
       - 3306:3306
     environment:

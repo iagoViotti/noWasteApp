@@ -20,7 +20,9 @@ const Header = () => {
   
   return (
     <header>
-      <h1>noWaste</h1>
+      <h1
+        translate='no'
+      >noWaste</h1>
       <div
         className="header-buttons"
       >
